@@ -24,6 +24,11 @@ while read arg; do
 			libreoffice "$arg" &
 			;;
 		*)
+			# then execute if is executable
+			if [ -x "$arg" ]; then
+				"$arg"
+				exit 0
+			fi
 			# then try matching by mimetype
 			mimetype=$(file -Lb --mime-type "$arg")
 			case "$mimetype" in
