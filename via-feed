@@ -6,7 +6,7 @@ if [[ "$1" == "-r" ]] || [[ ! -e "$cache" ]]; then
 	cat "$HOME/.config/via/shortcuts" > "$cache"
 	cat "$HOME/.config/via/websites" >> "$cache"
 	cat "$HOME/.cache/dmenu_run" >> "$cache"
-	find "$HOME" -mindepth 1 \( -name ".*" -o -path "$HOME/code/*" \) -prune -o -print | sort >> "$cache"
+	find "$HOME" -mindepth 1 \( -name ".*" $(printf " -o -path %s" $(cat "$HOME/.config/via/feed.blacklist")) \) -prune -o -print | sort >> "$cache"
 fi
 
 cat "$cache"
